@@ -23,6 +23,14 @@ class BooksApp extends React.Component {
     })
   }
 
+  changeShelf(id, value) {
+    console.log(`ID: ${id}. Value: ${value}`)
+    BooksAPI.update(id, value).then( (res) => {
+      console.log(res)
+      this.getAllBooks()
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -30,11 +38,7 @@ class BooksApp extends React.Component {
           <ListBooks
             books={this.state.books}
             changeShelf={(id, value) => {
-              console.log(`ID: ${id}. Value: ${value}`)
-              BooksAPI.update(id, value).then( (res) => {
-                console.log(res)
-                this.getAllBooks()
-              })
+              this.changeShelf(id, value)
             }}
           />
         )} />
