@@ -5,7 +5,7 @@ class Book extends Component {
     super(props);
 
     this.state = {
-      value: this.props.book.shelf
+      value: ""
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,6 +16,23 @@ class Book extends Component {
     if (this.props.changeShelf)
         this.props.changeShelf(this.props.book, event.target.value)
   }
+
+  componentDidMount() {
+    if (this.props.book.shelf) this.setState({value: this.props.book.shelf})
+    if (this.props.myBooks) {
+      let findBook = this.props.myBooks.filter( (b) => {
+        //console.log(`b.id: ${b.id}. This book id: ${this.props.book.id}. This book name: ${this.props.book.title}`)
+        return b.id === this.props.book.id
+      })
+      
+      if (findBook.length > 0) {
+        console.log(findBook[0].shelf)
+        this.setState({value: findBook[0].shelf})
+      }
+    }
+  }
+    
+  
 
   render() {
     const { book } = this.props

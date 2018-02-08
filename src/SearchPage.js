@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 class SearchPage extends Component {
   state = {
@@ -14,6 +15,12 @@ class SearchPage extends Component {
       console.log(res)
       this.setState({searchResult: res})
     })
+  }
+
+  handleChange(id, value) {
+    console.log("Book handle change")
+    if (this.props.changeShelf)
+        this.props.changeShelf(id, value)
   }
 
   render() {
@@ -39,12 +46,19 @@ class SearchPage extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.searchResult.map( (s) => {
-              return(
-                // TODO: Reuse the Books component and show which shelf the books belongs to.
-                <li key={s.id}>{s.title}</li>
-              )
-            })}
+            {this.state.searchResult.map( (book) => {
+                    return (
+                      <Book
+                        book={book}
+                        key={book.id}
+                        changeShelf={(id, value) => {
+                          this.handleChange(id, value)
+                        }}
+                        myBooks={this.props.books}
+                      />
+                    )
+                  })
+            }
           </ol>
         </div>
       </div>
