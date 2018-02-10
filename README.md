@@ -4,9 +4,7 @@ This project is part of Udacity's React Fundamentals course.
 
 It is forked from Udacity's starter template.
 
-## TL;DR
-
-To use the application:
+## Installation and start
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
