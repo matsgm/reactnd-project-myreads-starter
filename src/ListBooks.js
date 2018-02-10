@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Book from './Book'
+import Bookshelf from './Bookshelf'
 
 class ListBooks extends Component {
   static PropTypes = {
@@ -14,8 +14,6 @@ class ListBooks extends Component {
   }
 
   render() {
-    // TODO: Make component of 'bookshelf'
-
     const { books } = this.props
 
     return (
@@ -25,66 +23,33 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {books.filter( (books) => { return books.shelf === "currentlyReading" })
-                        .map( (books) => {
-                          return (
-                            <Book
-                              book={books}
-                              key={books.id}
-                              changeShelf={(id, value) => {
-                                this.handleChange(id, value)
-                              }}
-                            />
-                          )
-                        })
-                  }
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {books.filter( (books) => { return books.shelf === "wantToRead" })
-                        .map( (books) => {
-                          return (
-                            <Book
-                              book={books}
-                              key={books.id}
-                              changeShelf={(id, value) => {
-                                this.handleChange(id, value)
-                              }}
-                            />
-                          )
-                        })
-                  }
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {books.filter( (books) => { return books.shelf === "read" })
-                        .map( (books) => {
-                          return (
-                            <Book
-                              book={books}
-                              key={books.id}
-                              changeShelf={(id, value) => {
-                                this.handleChange(id, value)
-                              }}
-                            />
-                          )
-                        })
-                  }
-                </ol>
-              </div>
-            </div>
+            <Bookshelf
+              bookshelfTitle='Currently Reading'
+              booksInShelf={books.filter( (books) => {
+                return books.shelf === 'currentlyReading'
+              })}
+              changeShelf={(id, value) => {
+                this.handleChange(id, value)
+              }}
+            />
+            <Bookshelf
+              bookshelfTitle='Want to read'
+              booksInShelf={books.filter( (books) => {
+                return books.shelf === 'wantToRead'
+              })}
+              changeShelf={(id, value) => {
+                this.handleChange(id, value)
+              }}
+            />
+            <Bookshelf
+              bookshelfTitle='Read'
+              booksInShelf={books.filter( (books) => {
+                return books.shelf === 'read'
+              })}
+              changeShelf={(id, value) => {
+                this.handleChange(id, value)
+              }}
+            />
           </div>
         </div>
         <div className="open-search">
