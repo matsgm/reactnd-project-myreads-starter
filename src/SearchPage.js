@@ -20,9 +20,9 @@ class SearchPage extends Component {
     }
   }
 
-  handleChange(id, value) {
+  handleChange(book, shelf) {
     if (this.props.changeShelf)
-        this.props.changeShelf(id, value)
+        this.props.changeShelf(book, shelf)
   }
 
   render() {
@@ -45,8 +45,8 @@ class SearchPage extends Component {
                       <Book
                         book={book}
                         key={book.id}
-                        changeShelf={(id, value) => {
-                          this.handleChange(id, value)
+                        changeShelf={(book, shelf) => {
+                          this.handleChange(book, shelf)
                         }}
                         myBooks={this.props.books}
                       />

@@ -8,9 +8,9 @@ class ListBooks extends Component {
     books: PropTypes.array.isRequired
   }
 
-  handleChange(id, value) {
+  handleChange(book, shelf) {
     if (this.props.changeShelf)
-        this.props.changeShelf(id, value)
+        this.props.changeShelf(book, shelf)
   }
 
   render() {
@@ -28,8 +28,8 @@ class ListBooks extends Component {
               booksInShelf={books.filter( (books) => {
                 return books.shelf === 'currentlyReading'
               })}
-              changeShelf={(id, value) => {
-                this.handleChange(id, value)
+              changeShelf={(book, shelf) => {
+                this.handleChange(book, shelf)
               }}
             />
             <Bookshelf
@@ -37,8 +37,8 @@ class ListBooks extends Component {
               booksInShelf={books.filter( (books) => {
                 return books.shelf === 'wantToRead'
               })}
-              changeShelf={(id, value) => {
-                this.handleChange(id, value)
+              changeShelf={(book, shelf) => {
+                this.handleChange(book, shelf)
               }}
             />
             <Bookshelf
@@ -46,8 +46,8 @@ class ListBooks extends Component {
               booksInShelf={books.filter( (books) => {
                 return books.shelf === 'read'
               })}
-              changeShelf={(id, value) => {
-                this.handleChange(id, value)
+              changeShelf={(book, shelf) => {
+                this.handleChange(book, shelf)
               }}
             />
           </div>
